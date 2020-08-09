@@ -7,5 +7,5 @@ Target = usr/lib/modules/*/vmlinuz
 [Action]
 Depends = dracut
 Description = Removing kernel and initrd from /boot...
-Exec = /bin/sh -c 'kernel-install remove $(ls /lib/modules)'
+Exec = /bin/sh -c 'for i in $(ls /lib/modules); do kernel-install remove $i; done'
 When = PreTransaction

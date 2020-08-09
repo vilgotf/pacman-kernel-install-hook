@@ -7,5 +7,5 @@ Target = usr/lib/modules/*/vmlinuz
 [Action]
 Depends = dracut
 Description = Installing kernel and initrd to /boot...
-Exec = /bin/sh -c 'kernel-install add $(ls /lib/modules) /lib/modules/*/vmlinuz'
+Exec = /bin/sh -c 'for i in $(ls /lib/modules); do kernel-install add $i /lib/modules/$i/vmlinuz; done'
 When = PostTransaction
