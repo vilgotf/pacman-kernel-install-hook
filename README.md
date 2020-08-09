@@ -6,3 +6,9 @@ Prerequisites:
 
 Other configuration requirements:
 * None
+
+Conflicts:
+* Should not be used at the same time as [a hook to generate a new dracut image on update](https://wiki.archlinux.org/index.php/Dracut#Generate_a_new_initramfs_on_kernel_upgrade), my hook is all you need
+
+"Problems":
+* Images are not placed in `/boot/`, kernel + initrd goes to `/boot/$MACHINE-ID/$KVER/{vmlinuz,initrd}`
