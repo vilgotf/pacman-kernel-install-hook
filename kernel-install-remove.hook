@@ -1,11 +1,11 @@
 [Trigger]
-Type = Path
 Operation = Remove
 Operation = Upgrade
+Type = Path
 Target = usr/lib/modules/*/vmlinuz
 
 [Action]
-Depends = dracut
 Description = Removing kernel and initrd from /boot...
-Exec = /bin/sh -c 'for i in $(ls /lib/modules); do kernel-install remove $i; done'
+Exec = /bin/sh -c 'while read -r version; do version=${version#*modules/}; version=${version%*/vmlinuz}; kernel-install remove $version; done'
 When = PreTransaction
+NeedsTargets

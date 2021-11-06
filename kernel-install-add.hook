@@ -1,12 +1,11 @@
 [Trigger]
-Type = Path
 Operation = Install
-Operation = Remove
 Operation = Upgrade
+Type = Path
 Target = usr/lib/modules/*/vmlinuz
 
 [Action]
-Depends = dracut
 Description = Installing kernel and initrd to /boot...
-Exec = /bin/sh -c 'for i in $(ls /lib/modules); do kernel-install add $i /lib/modules/$i/vmlinuz; done'
+Exec = /bin/sh -c 'while read -r version; do version=${version#*modules/}; version=${version%*/vmlinuz}; kernel-install add $version /lib/modules/$version/vmlinuz; done'
 When = PostTransaction
+NeedsTargets
