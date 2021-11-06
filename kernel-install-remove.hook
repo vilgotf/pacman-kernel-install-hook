@@ -2,10 +2,10 @@
 Operation = Remove
 Operation = Upgrade
 Type = Path
-Target = usr/lib/modules/*/vmlinuz
+Target = usr/lib/modules/*/pkgbase
 
 [Action]
 Description = Removing kernel and initrd from /boot...
-Exec = /bin/sh -c 'while read -r version; do version=${version#*modules/}; version=${version%*/vmlinuz}; kernel-install remove $version; done'
+Exec = /bin/sh -c 'while read -r pkgbase; do kver=${pkgbase#'usr/lib/modules/'}; kver=${kver%'/pkgbase'}; kernel-install remove $kver; done'
 When = PreTransaction
 NeedsTargets

@@ -2,10 +2,10 @@
 Operation = Install
 Operation = Upgrade
 Type = Path
-Target = usr/lib/modules/*/vmlinuz
+Target = usr/lib/modules/*/pkgbase
 
 [Action]
 Description = Installing kernel and initrd to /boot...
-Exec = /bin/sh -c 'while read -r version; do version=${version#*modules/}; version=${version%*/vmlinuz}; kernel-install add $version /lib/modules/$version/vmlinuz; done'
+Exec = /bin/sh -c 'while read -r pkgbase; do kver=${pkgbase#'usr/lib/modules/'}; kver=${kver%'/pkgbase'}; kernel-install add $kver /lib/modules/$kver/vmlinuz; done'
 When = PostTransaction
 NeedsTargets
